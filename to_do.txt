@@ -1,0 +1,17 @@
+Build an e-commerec api
+
+step1: authorization and authenitication 
+- endpoint:register and login 
+- method:Post
+- packages:bcrypt, joi,express,mongose, validator
+
+step2: post Products
+-endpoint: postProducts, update products,getAll/signle products delete
+-methods:   Post,Patch,Get,Delete
+
+step3: Order for the products
+endpoint:orderproducts/add to cart
+
+step4:   Api features
+
+-pagination,filter, sort and search
