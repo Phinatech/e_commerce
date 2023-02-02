@@ -7,8 +7,7 @@ export const validator  = async (
     body:Object,
     next:NextFunction
     ): Promise<void> =>{
-        const value = await SchemaName.validate(body,
-            {
+        const value = await SchemaName.validate(body,{
         abortEarly:false,
         allowUnknown:true,
         stripUnknown:true,

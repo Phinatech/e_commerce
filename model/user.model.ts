@@ -27,15 +27,15 @@ const userSchema: Schema<UserSchema> = new Schema({
     required: [true, "Please provide your passwod"],
     minlength: 6,
   },
-  cart:[
-   {
-    items:{
-        products:Schema.Types.ObjectId,
-        ref:"products"
-    }
-   }
+  // cart:[
+  //  {
+  //   items:{
+  //       products:Schema.Types.ObjectId,
+  //       ref:"products"
+  //   }
+  //  }
 
-  ]
+  // ]
 },{
     versionKey:false,
     timestamps:true
