@@ -4,7 +4,8 @@ import { NextFunction,Request,Response } from "express"
 import bcrypt from "bcrypt"
 import { asyncHandler } from "../utils/AsyncHandler"
 import { AppError, HttpCode } from "../utils/AppError"
-import { nextTick } from "process";
+import jwt from "jsonwebtoken"
+import { generateToken } from "../middlewares/authorization/user.auth";
 
 export const Register = asyncHandler(
    async (
@@ -16,34 +17,33 @@ export const Register = asyncHandler(
     
    const salt:string = await bcrypt.genSalt(12)
    const hassedPassword = await bcrypt.hash(password, salt)
-    const regUser = UserModel.create({
+    const regUser = await UserModel.create({
       name,
       email,
       password: hassedPassword,
       confirmPassword: hassedPassword,
     });
 
-    if (!regUser) {
+    if (!regUser) 
       next(
         new AppError({
          message:"User not Created",
          httpCode:HttpCode.BAD_REQUEST
         })
       )
-    }
-
-    return res.status(HttpCode.CREATED).json({
-    data: {regUser},
-    })
-
+    
+      return res.status(200).json({
+         message:"Successfuly Created",
+         data:regUser
+      });
    }
-)
+);
 
  export const GetAll =async (req:Request,res:Response):Promise<Response>=> {
    try {
       const GettingAllUser = await UserModel.find()
       return res.status(200).json({
-         message:"User data gotten successfully",
+         message:`Gotten ${GettingAllUser.length}`,
          data:GettingAllUser
       })
    } catch (error) {
@@ -62,7 +62,7 @@ export const login = asyncHandler(
    ):Promise<Response> => {
    
    const {email,password} = req.body
-   if (email || password) {
+   if (!email || !password) {
       next(
          new AppError({
             message:"please provide a valid email or password",
@@ -80,9 +80,10 @@ export const login = asyncHandler(
          })
       )
    }
-
+const token = generateToken({email:User!.email, _id:User!._id})
   return res.status(HttpCode.OK).json({
-   message:`${User!.name} you  are welcome`
+   message:`${User!.name} you  are welcome`,
+   token:token
   })
   }
 )

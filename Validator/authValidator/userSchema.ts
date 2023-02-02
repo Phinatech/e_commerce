@@ -2,7 +2,7 @@ import Joi from "joi";
 
 const ValiSchema = {
   register: Joi.object({
-    name: Joi.string().required,
+    name: Joi.string().required(),
     email: Joi.string().email().required(),
     password: Joi.string().min(8).required(),
     confirmPassword: Joi.string().required().valid(Joi.ref("password")),

@@ -2,19 +2,19 @@ import { NextFunction } from "express";
 import { AppError, HttpCode } from "../utils/AppError";
 import Joi from "joi";
 
-export const validator  = async (
+export const validator  =  (
     SchemaName:Joi.ObjectSchema,
-    body:Object,
+    body:object,
     next:NextFunction
-    ): Promise<void> =>{
-        const value = await SchemaName.validate(body,{
+    ) =>{
+        const value = SchemaName.validate(body,{
         abortEarly:false,
         allowUnknown:true,
         stripUnknown:true,
         });
 
         try {
-           value.error? 
+           value.error ? 
            next(
             new AppError({
                 httpCode:HttpCode.BAD_REQUEST,

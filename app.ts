@@ -12,7 +12,7 @@ app
 .use(express.json())
 .use(cors())
 
-.use("/api/user", userRouter)
+.use("/api", userRouter)
 
 app.all("*", (req:Request,res:Response,next:NextFunction)=>{
     next(new AppError({
