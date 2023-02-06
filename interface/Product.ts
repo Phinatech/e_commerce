@@ -1,4 +1,11 @@
-import {} from "mongoose"
+import {Document, Schema} from "mongoose"
+
+export interface ReviewT{
+        user:Schema.Types.ObjectId;
+        name:string;
+        rating:number;
+        comments:string
+}
 
 export interface IProduct extends Document{
     name:String;
@@ -6,4 +13,6 @@ export interface IProduct extends Document{
     catergory:string;
     rating:number;
     productImage:string;
+    numberofReviews:number;
+    reviews:ReviewT[]
 }

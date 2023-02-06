@@ -13,7 +13,7 @@ export const Register = asyncHandler(
     res:Response,
     next:NextFunction
    ):Promise<Response> => {
-    const {name, email, password,confirmPassword} = req.body
+    const {name, email, password,confirmPassword,role} = req.body
     
    const salt:string = await bcrypt.genSalt(12)
    const hassedPassword = await bcrypt.hash(password, salt)
@@ -22,6 +22,7 @@ export const Register = asyncHandler(
       email,
       password: hassedPassword,
       confirmPassword: hassedPassword,
+      role
     });
 
     if (!regUser) 
@@ -39,6 +40,8 @@ export const Register = asyncHandler(
    }
 );
 
+
+//Getting All User
  export const GetAll =async (req:Request,res:Response):Promise<Response>=> {
    try {
       const GettingAllUser = await UserModel.find()
@@ -54,6 +57,24 @@ export const Register = asyncHandler(
    }
 }
 
+//Deleting a User
+
+export const Deleting =async (req:Request,res:Response):Promise<Response> => {
+   try {
+      const DeleteUser = await UserModel.findById(req.params.ID)
+      return res.json(HttpCode.OK).json({
+         message:"User Details has beeen deleted",
+         data:DeleteUser
+      })
+   } catch (error) {
+      return res.status(HttpCode.FORBIDDEN).json({
+         message:"An error ocuurred while deleting User",
+         data:error
+      })
+   }
+}
+
+//Login In a User
 export const login = asyncHandler(
   async (
    req:Request,
