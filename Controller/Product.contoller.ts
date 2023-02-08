@@ -3,7 +3,6 @@ import ProductModel from "../model/product.model"
 import { IProduct } from "../interface/Product"
 import { AppError, HttpCode, } from "../utils/AppError"
 import { asyncHandler } from "../utils/AsyncHandler";
-import { json } from "stream/consumers";
 
 
  export const Postproduct = asyncHandler(

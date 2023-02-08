@@ -17,7 +17,7 @@ app.listen(port,()=>{
 
 
 
-//its create an enviroment that hel-ps you encrypt a file.. so what your git does it helps yiu read or encrypt this push and allows alow you to push without pushing this file
+//its create an enviroment that hel-ps you encrypt a file.. so what your git does is it helps you read or encrypt file push and allows alow you to push without pushing this file
 
 //Process can be use to target a root element..
 //it helps in the event loop
